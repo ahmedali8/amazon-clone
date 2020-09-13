@@ -21,6 +21,10 @@
     margin-top: 5px;
 }
 
+.product__rating {
+    display: flex;
+}
+
 .product > img {
     max-height: 200px;
     width: 100%;
