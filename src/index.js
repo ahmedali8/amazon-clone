@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { StateProvider } from './context/StateProvider';
+import { initialState, reducer } from './context/reducer';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <StateProvider 
+        initialState={initialState}
+        reducer={reducer}
+    >
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </StateProvider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
