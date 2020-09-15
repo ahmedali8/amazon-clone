@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { auth } from '../firebase/firebaseConfig';
 
 import '../css/Login.css';
 
 const Login = () => {
 
+    let history = createBrowserHistory();
+    let navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const signIn = (e) => {
+    const login = (e) => {
         e.preventDefault();
 
-        // firebase shitt here...
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then((auth) => {
+                history.push('/')
+                navigate('/')
+            })
+            .catch(error => alert(error.message))
+
     }
 
     const register = (e) => {
         e.preventDefault();
 
-        // firebase shitt here...
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then((auth) => {
+                // it successfully created a new user with email and password
+                if(auth) {
+                    history.push('/')
+                }
+            })
+            .catch(error => alert(error.message))
     }
 
     return (
@@ -48,14 +67,14 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <button type="submit" onClick={() => signIn()} className='login__signInButton'>Sign In</button>
+                    <button type="submit" onClick={login} className='login__signInButton'>Sign In</button>
                 </form>
 
                 <p>
                     By continuing, you agree to FAKE CLONE AMAZON'S Conditions of Use and Privacy Notice.
                 </p>
 
-                <button type="submit" onClick={() => register()} className='login__registerButton'>Create your Amazon Account</button>
+                <button type="submit" onClick={register} className='login__registerButton'>Create your Amazon Account</button>
             </div>
         </div>
     );
