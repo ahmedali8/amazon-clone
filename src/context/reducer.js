@@ -1,5 +1,6 @@
 export const initialState = {
     basket: [],
+    user: null
 }
 
 // Selector
@@ -13,6 +14,7 @@ export const reducer = (state, action) => {
                 ...state,
                 basket: [...state.basket, action.item]
             }
+
         case 'REMOVE_FROM_BASKET':
             // get the index of the item to be removed
             const index = state.basket.findIndex(
@@ -35,6 +37,13 @@ export const reducer = (state, action) => {
                 ...state,
                 basket: newBasket
             }
+
+        case 'SET_USER':
+            return {
+                ...state,
+                user: action.user
+            }
+            
         default:
             return state;
     }
