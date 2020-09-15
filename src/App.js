@@ -8,6 +8,7 @@ import Login from './components/Login';
 import { auth } from './firebase/firebaseConfig';
 import { useStateValue } from './context/StateProvider';
 import FlipMove from 'react-flip-move';
+import Payment from './components/Payment';
 
 function App() {
 
@@ -49,6 +50,8 @@ function App() {
                         <Route path='/' element={<><Header /><Home /></>} />
 
                         <Route path='/checkout' element={<><Header /><Checkout /></>} />
+
+                        <Route path='/payment' element={<><Header /><Payment /></>} />
 
                         <Route path='/login' element={<Login />} />
                     </Routes>
