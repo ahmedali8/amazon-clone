@@ -7,6 +7,7 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import { auth } from './firebase/firebaseConfig';
 import { useStateValue } from './context/StateProvider';
+import FlipMove from 'react-flip-move';
 
 function App() {
 
@@ -14,11 +15,11 @@ function App() {
 
     useEffect(() => {
         // will run only once when the app component loads...
-    
+
         auth.onAuthStateChanged(authUser => {
             console.log('THE USER IS >>>', authUser);
 
-            if(authUser) {
+            if (authUser) {
                 // the user just logged in / was logged in
 
                 dispatch({
@@ -35,23 +36,25 @@ function App() {
                 });
             }
         })
-    
-    
+
+
     }, [dispatch]);
 
     return (
         <Router>
-            <div className='app'>
+            <FlipMove appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
+                <div className='app'>
 
-                <Routes>
-                    <Route path='/' element={<><Header /><Home /></>} />
+                    <Routes>
+                        <Route path='/' element={<><Header /><Home /></>} />
 
-                    <Route path='/checkout' element={<><Header /><Checkout /></>} />
+                        <Route path='/checkout' element={<><Header /><Checkout /></>} />
 
-                    <Route path='/login' element={<Login />} />
-                </Routes>
+                        <Route path='/login' element={<Login />} />
+                    </Routes>
 
-            </div>
+                </div>
+            </FlipMove>
         </Router>
     );
 }

@@ -3,6 +3,7 @@ import { useStateValue } from '../context/StateProvider';
 import SubTotal from './SubTotal';
 import CheckoutProduct from './CheckoutProduct';
 
+
 import '../css/Checkout.css';
 
 
@@ -23,18 +24,19 @@ const Checkout = () => {
                     <h2 className='checkout__title'>
                         Shopping Basket
                     </h2>
-
-                    {
-                        basket?.map((item) => (
-                            <CheckoutProduct
-                                id={item.id}
-                                title={item.title}
-                                price={item.price}
-                                rating={item.rating}
-                                image={item.image}
-                            />
-                        ))
-                    }
+                    
+                        {
+                            basket?.map((item) => (
+                                <CheckoutProduct
+                                    id={item.id}
+                                    title={item.title}
+                                    price={item.price}
+                                    rating={item.rating}
+                                    image={item.image}
+                                />
+                            ))
+                        }
+                    
 
                 </div>
             </div>

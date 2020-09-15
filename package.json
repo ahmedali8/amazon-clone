@@ -13,6 +13,7 @@
     "react": "^16.13.1",
     "react-currency-format": "^1.0.0",
     "react-dom": "^16.13.1",
+    "react-flip-move": "^3.0.4",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "3.4.3"
   },

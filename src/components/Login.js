@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { auth } from '../firebase/firebaseConfig';
+import FlipMove from 'react-flip-move';
 
 import '../css/Login.css';
 
@@ -32,7 +33,7 @@ const Login = () => {
             .createUserWithEmailAndPassword(email, password)
             .then((auth) => {
                 // it successfully created a new user with email and password
-                if(auth) {
+                if (auth) {
                     history.push('/')
                 }
             })
@@ -40,43 +41,45 @@ const Login = () => {
     }
 
     return (
-        <div className='login'>
-            <Link to="/">
-                <img
-                    className='login__logo'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'
-                    alt=''
-                />
-            </Link>
-
-            <div className='login__container'>
-                <h1>Sign In</h1>
-
-                <form>
-                    <h5>Email</h5>
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+        <FlipMove appearAnimation="fade" enterAnimation="fade" leaveAnimation="fade">
+            <div className='login'>
+                <Link to="/">
+                    <img
+                        className='login__logo'
+                        src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'
+                        alt=''
                     />
+                </Link>
 
-                    <h5>Password</h5>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                <div className='login__container'>
+                    <h1>Sign In</h1>
 
-                    <button type="submit" onClick={login} className='login__signInButton'>Sign In</button>
-                </form>
+                    <form>
+                        <h5>Email</h5>
+                        <input
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
 
-                <p>
-                    By continuing, you agree to FAKE CLONE AMAZON'S Conditions of Use and Privacy Notice.
+                        <h5>Password</h5>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <button type="submit" onClick={login} className='login__signInButton'>Sign In</button>
+                    </form>
+
+                    <p>
+                        By continuing, you agree to FAKE CLONE AMAZON'S Conditions of Use and Privacy Notice.
                 </p>
 
-                <button type="submit" onClick={register} className='login__registerButton'>Create your Amazon Account</button>
+                    <button type="submit" onClick={register} className='login__registerButton'>Create your Amazon Account</button>
+                </div>
             </div>
-        </div>
+        </FlipMove>
     );
 };
 
