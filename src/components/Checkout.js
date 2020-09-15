@@ -8,7 +8,7 @@ import '../css/Checkout.css';
 
 const Checkout = () => {
 
-    const [{ basket }] = useStateValue();
+    const [{ basket, user }] = useStateValue();
 
     return (
         <div className='checkout'>
@@ -19,6 +19,7 @@ const Checkout = () => {
                     alt=''
                 />
                 <div>
+                    <h2>Hello, {user?.email}</h2>
                     <h2 className='checkout__title'>
                         Shopping Basket
                     </h2>
