@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import Checkout from './components/Checkout';
@@ -9,6 +8,14 @@ import { auth } from './firebase/firebaseConfig';
 import { useStateValue } from './context/StateProvider';
 import FlipMove from 'react-flip-move';
 import Payment from './components/Payment';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+import './App.css';
+
+const promise = loadStripe(
+    'pk_test_51HRvOVCWzEzHqhesijxwveJ8duEwMcdz5gAWzISoaxR78EKfIjQlbyeqsb8x0dirujij4rYfPIiy7vzeD5GmFWOH00iK8o2BgX'
+);
 
 function App() {
 
@@ -47,13 +54,42 @@ function App() {
                 <div className='app'>
 
                     <Routes>
-                        <Route path='/' element={<><Header /><Home /></>} />
+                        <Route
+                            path='/'
+                            element={
+                                <>
+                                    <Header />
+                                    <Home />
+                                </>
+                            }
+                        />
 
-                        <Route path='/checkout' element={<><Header /><Checkout /></>} />
+                        <Route
+                            path='/checkout'
+                            element={
+                                <>
+                                    <Header />
+                                    <Checkout />
+                                </>
+                            }
+                        />
 
-                        <Route path='/payment' element={<><Header /><Payment /></>} />
+                        <Route
+                            path='/payment'
+                            element={
+                                <>
+                                    <Header />
+                                    <Elements stripe={promise} >
+                                        <Payment />
+                                    </Elements>
+                                </>
+                            }
+                        />
 
-                        <Route path='/login' element={<Login />} />
+                        <Route
+                            path='/login'
+                            element={<Login />}
+                        />
                     </Routes>
 
                 </div>
