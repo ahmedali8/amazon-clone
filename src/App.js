@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import Orders from './components/Orders';
 import { auth } from './firebase/firebaseConfig';
 import { useStateValue } from './context/StateProvider';
 import FlipMove from 'react-flip-move';
@@ -89,6 +90,11 @@ function App() {
                         <Route
                             path='/login'
                             element={<Login />}
+                        />
+
+                        <Route
+                            path='/orders'
+                            element={<Orders />}
                         />
                     </Routes>
 
