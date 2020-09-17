@@ -11,7 +11,7 @@ import '../css/Payment.css';
 
 const Payment = () => {
 
-    const [{ basket, user }] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
     const navigate = useNavigate();
 
     const stripe = useStripe();
@@ -57,6 +57,10 @@ const Payment = () => {
             setSucceeded(true);
             setError(null);
             setProcessing(false);
+
+            dispatch({
+                type: 'EMPTY_BASKET'
+            });
 
             navigate('/orders', { replace: true });
         })
