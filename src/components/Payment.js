@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import CheckoutProduct from './CheckoutProduct';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from '../context/reducer';
+import axios from '../axios/axios';
 
 import '../css/Payment.css';
 
 const Payment = () => {
 
     const [{ basket, user }] = useStateValue();
+    const navigate = useNavigate();
+
+    const stripe = useStripe();
+    const elements = useElements();
 
     const [processing, setProcessing] = useState("")
     const [disabled, setDisabled] = useState(true);
     const [succeeded, setSucceeded] = useState(false)
     const [error, setError] = useState(null);
+    const [clientSecret, setClientSecret] = useState(true);
 
-    const stripe = useStripe();
-    const elements = useElements();
+    useEffect(() => {
+        // generate the special stripe secret which allows us to charge a customer
+
+        const getClientSecret = async () => {
+            const response = await axios({
+                method: 'post',
+                // stripe expects the total in a currencies subunits
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
+            });
+            setClientSecret(response.data.clientSecret);
+        }
+
+        getClientSecret();
+    }, [basket])
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,7 +45,19 @@ const Payment = () => {
         setProcessing(true);
         
         // stripe stuff
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement)
+            }
+        }).then(({ paymentIntent }) => {
+            // payment Intent = payment confirmation
 
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false);
+
+            navigate.replace('/orders', { replace: true });
+        })
     }
 
     const handleChange = (event) => {
