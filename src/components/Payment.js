@@ -58,7 +58,7 @@ const Payment = () => {
             setError(null);
             setProcessing(false);
 
-            navigate.replace('/orders', { replace: true });
+            navigate('/orders', { replace: true });
         })
     }
 
@@ -101,6 +101,7 @@ const Payment = () => {
                     <div className='payment__items'>
                         {basket?.map((item) => (
                             <CheckoutProduct
+                                key={item.id}
                                 id={item.id}
                                 title={item.title}
                                 price={item.price}
