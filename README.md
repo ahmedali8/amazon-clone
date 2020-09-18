@@ -1,6 +1,6 @@
 To run this app you need to run functions backend on your local host 
 
-1. install all the dependencies in the functions folder(backend) and run this command
+1. install all the dependencies in the master folder as well as functions folder(backend) and run this command
 `npm install`
 
 2. Go to functions folder and run this command
