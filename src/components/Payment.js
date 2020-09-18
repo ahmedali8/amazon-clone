@@ -48,7 +48,7 @@ const Payment = () => {
         setProcessing(true);
         
         // stripe stuff
-        const payload = await stripe.confirmCardPayment(clientSecret, {
+        await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
@@ -76,6 +76,7 @@ const Payment = () => {
 
             navigate('/orders', { replace: true });
         })
+
     }
 
     const handleChange = (event) => {
