@@ -4,7 +4,7 @@ import FlipMove from 'react-flip-move';
 
 import '../css/CheckoutProduct.css'
 
-const CheckoutProduct = ({ id, title, price, rating, image }) => {
+const CheckoutProduct = ({ id, title, price, rating, image, hideButton }) => {
 
     const [, dispatch] = useStateValue();
 
@@ -39,7 +39,9 @@ const CheckoutProduct = ({ id, title, price, rating, image }) => {
                         }
                     </div>
 
-                    <button onClick={() => removeFromBasket()}>Remove to Basket</button>
+                    {!hideButton && 
+                        <button onClick={() => removeFromBasket()}>Remove to Basket</button>
+                    }
 
                 </div>
 
