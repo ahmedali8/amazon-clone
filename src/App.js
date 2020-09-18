@@ -94,7 +94,12 @@ function App() {
 
                         <Route
                             path='/orders'
-                            element={<Orders />}
+                            element={
+                                <>
+                                    <Header />
+                                    <Orders />
+                                </>
+                            }
                         />
                     </Routes>
 
